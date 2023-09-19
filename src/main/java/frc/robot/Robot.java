@@ -1,40 +1,16 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package frc.robot;
 
-import com.pathplanner.lib.server.PathPlannerServer;
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.util.datalog.DataLog;
-import edu.wpi.first.util.datalog.DoubleArrayLogEntry;
-import edu.wpi.first.wpilibj.DataLogManager;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class Robot extends TimedRobot {
 
   private RobotContainer robotContainer;
-  private static Alliance allianceColor;
-  private static String allianceSide;
-  public DoubleArrayLogEntry odometryLog;
+
   @Override
   public void robotInit() {
     robotContainer = new RobotContainer();
-    CameraServer.startAutomaticCapture();
-    PathPlannerServer.startServer(5811);
-    DataLogManager.start();
-    DataLog log = DataLogManager.getLog();
-    odometryLog = new DoubleArrayLogEntry(log, "/odometry");
   }
 
   @Override
@@ -53,21 +29,6 @@ public class Robot extends TimedRobot {
 
   }
 
-  public static String getAllianceColor() {
-    if (allianceColor == DriverStation.Alliance.Blue) {
-      return "Blue";
-    }
-    return "Red";
-  }
-
-  public static Alliance getAlliance() {
-    return allianceColor;
-  }
-
-  public static String getAllianceSide() {
-    return allianceSide;
-  }
-
   @Override
   public void autonomousPeriodic() {}
 
@@ -79,7 +40,6 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     CommandScheduler.getInstance().run();
-    odometryLog.append(SmartDashboard.getNumberArray("Odometry", new double[]{0,0,0}));
   }
 
   @Override
