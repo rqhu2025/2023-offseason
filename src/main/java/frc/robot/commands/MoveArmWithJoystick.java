@@ -10,9 +10,13 @@ import frc.robot.subsystems.arm.ArmSubsystem;
 
 public class MoveArmWithJoystick extends CommandBase {
   /** Creates a new MoveArmWithJoystick. */
-  public MoveArmWithJoystick(ArmSubsystem armSubsystem, XboxController joystick1) {
 
+  //initialize your subsystems, controllers
+  XboxController joystick1;
+  public MoveArmWithJoystick(ArmSubsystem armSubsystem, XboxController joystick1) {
+    //add your parameters to the command
     // Use addRequirements() here to declare subsystem dependencies.
+    this.joystick1 = joystick1;
   }
 
   @Override
@@ -20,12 +24,14 @@ public class MoveArmWithJoystick extends CommandBase {
 
   @Override
   public void execute() {
-    //The left joystick of an xbox controller is how we will move the arm in this exercise, and this value can be found by the code joystick.getLeftY()
+    double joystickArmPower = joystick1.getLeftY(); //use this joystick armpower to set power to your motors
   }
 
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    
+  }
 
   @Override
   public boolean isFinished() {

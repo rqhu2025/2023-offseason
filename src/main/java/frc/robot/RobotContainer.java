@@ -129,7 +129,6 @@ public class RobotContainer {
 
   public void setDefaultCommands() {
     armSubsystem.setDefaultCommand(moveArmWithJoystick);
-
   }
 
 }
